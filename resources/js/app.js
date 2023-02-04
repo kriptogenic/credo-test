@@ -9,6 +9,7 @@ document.addEventListener('alpine:init', () => {
         isModalOpen: false,
         gift: {},
         address: '',
+        convert: false,
         async getGift() {
             let response = await fetch('/gift', {
                 method: 'POST',
@@ -19,6 +20,8 @@ document.addEventListener('alpine:init', () => {
             });
             const data = await response.json()
             this.gift = data.data
+            this.address = ''
+            this.convert = false
             this.isModalOpen = true
         },
         async acceptGift() {
@@ -34,7 +37,8 @@ document.addEventListener('alpine:init', () => {
                     'X-CSRF-TOKEN': this.getCsrfToken()
                 },
                 body: JSON.stringify({
-                    address: this.address
+                    address: this.address,
+                    convert: this.convert
                 })
             })
             alert('Приз успешно потдвержден')
