@@ -21,5 +21,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('gift', [GiftController::class, 'store']);
+    Route::put('gift/{gift}', [GiftController::class, 'update']);
+    Route::delete('gift/{gift}', [GiftController::class, 'destroy']);
 });
 require __DIR__.'/auth.php';
